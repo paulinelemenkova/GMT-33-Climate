@@ -1,5 +1,5 @@
 #!/bin/sh
-# Purpose: shaded relief grid raster map from the GEBCO 15 arc sec global data set (here: Ethiopia)
+# Purpose: Climate datasets https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php (here: Ethiopia)
 # GMT modules: gmtset, gmtdefaults, grdcut, makecpt, grdimage, psscale, grdcontour, psbasemap, gmtlogo, psconvert
 
 # GMT set up
@@ -23,7 +23,7 @@ gdalinfo -stats et_aet.nc
 #  Minimum=0.000, Maximum=126.000
 
 # Make color palette
-gmt makecpt -Cinferno.cpt -V -T1/126/5 -Ic > myocean.cpt
+gmt makecpt -Cinferno.cpt -V -T0/126/1 -Ic > myocean.cpt
 # gmt makecpt --help
 #-Ic
 # elevation etopo1 world elevation dem1 dem2 dem3
@@ -44,7 +44,7 @@ gmt psscale -Dg31.5/3+w13.3c/0.15i+v+o0.0/0i+ml -R -J -Cmyocean.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg10f5a10+l"Colors: 'turbo' Google's Improved Rainbow Colormap [C=RGB, 1/126/5]" \
+    -Bg10f5a10+l"Colors: 'inferno' New colormap Option B from matplotlib [C=RGB, 1/126/5]" \
     -I0.2 -By+lmm -O -K >> $ps
     
 # Add grid
