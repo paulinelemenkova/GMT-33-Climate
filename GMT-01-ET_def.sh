@@ -1,5 +1,5 @@
 #!/bin/sh
-# Purpose: shaded relief grid raster map from the GEBCO 15 arc sec global data set (here: Ethiopia)
+# Purpose: Climate datasets https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php (here: Ethiopia)
 # GMT modules: gmtset, gmtdefaults, grdcut, makecpt, grdimage, psscale, grdcontour, psbasemap, gmtlogo, psconvert
 
 # GMT set up
@@ -43,7 +43,7 @@ gmt psscale -Dg31.5/3+w13.3c/0.15i+v+o0.0/0i+ml+e -R -J -Cmyocean.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg10f5a10+l"Color scale: 'jet' [R=0/232, H=0, C=HSV]" \
+    -Bg10f5a10+l"Color scale: 'wysiwyg' [R=0/232, H=0, C=HSV]" \
     -I0.2 -By+lm -O -K >> $ps
     
 # Add grid
