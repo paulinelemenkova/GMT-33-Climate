@@ -1,5 +1,5 @@
 #!/bin/sh
-# Purpose: shaded relief grid raster map from the GEBCO 15 arc sec global data set (here: Ethiopia)
+# Purpose: Climate datasets https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php (here: Ethiopia)
 # GMT modules: gmtset, gmtdefaults, grdcut, makecpt, grdimage, psscale, grdcontour, psbasemap, gmtlogo, psconvert
 
 # GMT set up
@@ -25,8 +25,8 @@ gdalinfo -stats et_soil.nc
 #  Minimum=0.000, Maximum=180.000
 
 # Make color palette
-gmt makecpt -Cdrywet.cpt -V -T1/200 -N > myocean.cpt
-# elevation etopo1 world elevation dem1 dem2 dem3
+gmt makecpt -Cvik.cpt -V -T0/180/1 -N -Ic > myocean.cpt
+# elevation etopo1 world elevation dem1 dem2 dem3 drywet wysiwyg vik
 
 ps=ET_Soil.ps
 # Make background transparent image
@@ -37,14 +37,14 @@ gmt grdcontour et_soil.nc -R -J -C20 -A20 -Wthinner,white -O -K >> $ps
 
 # Add coastlines, borders, rivers
 gmt pscoast -R -J -P \
-    -Ia/thinner,blue -Na -N1/thickest,red -W0.1p -Df -O -K >> $ps
+    -Ia/thinner,blue -Na -N1/thicker,yellow -W0.1p -Df -O -K >> $ps
     
 # Add color legend
 gmt psscale -Dg31.5/3+w13.3c/0.15i+v+o0.0/0i+ml -R -J -Cmyocean.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg10f5a10+l"Color scale: 'drywet' dry to wet colors [R=0/200, H=0, C=HSV]" \
+    -Bg10f5a10+l"Color scale: 'vik' perceptually uniform bimodal colormap, light, by F.Crameri [R=0/200,S,C=RGB]" \
     -I0.2 -By+lm -O -K >> $ps
     
 # Add grid
