@@ -24,7 +24,7 @@ gdalinfo -stats gh_pdsi.nc
 # Minimum=-18.700, Maximum=9.500, Mean=-8.398, StdDev=7.181
 
 # Make color palette
-gmt makecpt -Cturbo.cpt -V -T-10/10/0.5 -Ic > myocean.cpt
+gmt makecpt -Cturbo.cpt -V -T-10/2/0.5 > myocean.cpt
 # gmt makecpt --help
 # elevation etopo1 world elevation dem1 dem2 dem3
 
@@ -33,7 +33,7 @@ ps=GH_PDSI_1983.ps
 gmt grdimage gh_pdsi.nc -Cmyocean.cpt -R-4/2/4/12 -JM5.0i -I+a15+ne0.75 -Xc -P -K > $ps
     
 # Add isolines
-gmt grdcontour gh_pdsi.nc -R -J -C1 -A1 -Wthinner,brown -O -K >> $ps
+gmt grdcontour gh_pdsi.nc -R -J -C0.5 -A1 -Wthin,brown -O -K >> $ps
 
 # Add coastlines, borders, rivers
 gmt pscoast -R -J -P \
@@ -80,24 +80,24 @@ gmt pstext -R -J -N -O -K \
 EOF
 # COUNTRIES
 gmt pstext -R -J -N -O -K \
--F+jTL+f14p,25,white+jLB >> $ps << EOF
+-F+jTL+f14p,25,black+jLB -Gwhite@60 >> $ps << EOF
 -1.9 7.3 G   H   A   N   A
 EOF
 gmt pstext -R -J -N -O -K \
--F+jTL+f10p,25,white+jLB >> $ps << EOF
+-F+jTL+f10p,25,black+jLB -Gwhite@60 >> $ps << EOF
 0.8 6.5 T O G O
 EOF
 gmt pstext -R -J -N -O -K \
--F+jTL+f10p,25,white+jLB >> $ps << EOF
+-F+jTL+f10p,25,black+jLB -Gwhite@60 >> $ps << EOF
 -3.6 8.5 IVORY
 -3.6 8.1 COAST
 EOF
 gmt pstext -R -J -N -O -K \
--F+jTL+f10p,25,white+jLB+a-270 >> $ps << EOF
+-F+jTL+f10p,25,black+jLB+a-270 -Gwhite@60 >> $ps << EOF
 1.9 7.2 BENIN
 EOF
 gmt pstext -R -J -N -O -K \
--F+jTL+f10p,25,white+jLB >> $ps << EOF
+-F+jTL+f10p,25,black+jLB -Gwhite@60 >> $ps << EOF
 -3.5 11.5 B  U  R  K  I  N  A      F  A  S  O
 EOF
 gmt pstext -R -J -N -O -K \
