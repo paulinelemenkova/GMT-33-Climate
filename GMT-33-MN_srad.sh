@@ -27,7 +27,7 @@ gmt grdcut TerraClimate_srad_2019.nc -R87.5/120/41.5/52.5 -Gmn_srad.nc
 gdalinfo -stats mn_srad.nc
 
 # Minimum=40.000, Maximum=113.000, Mean=77.007, StdDev=15.877
-gmt makecpt -Cwysiwyg -T40/113 > pauline.cpt
+gmt makecpt -C22_hue_sat_value2 -T40/113 > pauline.cpt
 # gmt makecpt --help
 
 
@@ -66,7 +66,7 @@ gmt psscale -Dg87.6/38.9+w16.5c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg10f1a10+l"Colormap  wysiwyg: 20 well-separated RGB colors (-T40/113 [C=RGB])" \
+    -Bg10f1a10+l"Colormap '22 hue sat value2' from colour tables of IDL KST Python (-T40/113 [C=RGB])" \
     -I0.2 -By+l"Wm@+-2@+" -O -K >> $ps
     
 # Add grid
