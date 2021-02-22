@@ -23,7 +23,7 @@ gmt grdcut TerraClimate_soil_2019.nc -R87.5/120/41.5/52.5 -Gmn_soil.nc
 gdalinfo -stats mn_soil.nc
 #  Minimum=0.000, Maximum=155.000, Mean=6.393, StdDev=13.850
 #gmt makecpt -Chaxby -T-234/393/1 > colors.cpt
-gmt makecpt -Ccool -T0/20/1 > pauline.cpt
+gmt makecpt -Ccool -T0/20 > pauline.cpt
 # gmt makecpt --help
 
 
@@ -62,7 +62,7 @@ gmt psscale -Dg87.6/38.9+w16.5c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg2f0.1a1+l"Colormap 'turbo' Google's Improved Rainbow Colormap (-8.1/5.8/0.1 [C=RGB])" \
+    -Bg2f0.1a1+l"Colormap 'cool' Linear change from blue to magenta (0/20 [C=RGB])" \
     -I0.2 -By+l"mm/m" -O -K >> $ps
     
 # Add grid
