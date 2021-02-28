@@ -1,5 +1,6 @@
 #!/bin/sh
 # Purpose: Climate datasets https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php (here: Botswana)
+# http://soliton.vm.bytemark.co.uk/pub/cpt-city/ocal/tn/spectrum-rainbow-medium.png.index.html
 # GMT modules: gmtset, gmtdefaults, grdcut, makecpt, grdimage, psscale, grdcontour, psbasemap, gmtlogo, psconvert
 
 # GMT set up
