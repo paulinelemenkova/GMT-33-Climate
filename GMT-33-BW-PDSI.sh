@@ -48,7 +48,7 @@ gmt psscale -Dg19.3/-27.7+w16.5c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
     -Bg2f0.1a1+l"Colormap: 'qual-mixed-12' gradient by Statistik Stadt Zürich [-T-5.1/12.1, discrete, RGB, 12 segments]" \
-    -I0.2 -By+l"T\232, Celcius" -O -K >> $ps
+    -I0.2 -By+l"PDSI value" -O -K >> $ps
     
 # Add grid
 gmt psbasemap -R -J \
