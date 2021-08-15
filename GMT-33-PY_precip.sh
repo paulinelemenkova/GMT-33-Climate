@@ -23,7 +23,6 @@ gmt grdcut TerraClimate_ppt_2020.nc -R297/306/-28/-19 -Gpy_ppt.nc
 gdalinfo -stats py_ppt.nc
 # Minimum=17.800, Maximum=272.400, Mean=124.220, StdDev=45.079
 gmt makecpt -Chaxby -T17/273 > pauline.cpt
-#gmt makecpt -Csky-33 -T0/4.6 -Ic > pauline.cpt
 # gmt makecpt --help
 
 
@@ -62,7 +61,7 @@ gmt psscale -Dg297/-28.6+w15.2c/0.4c+h+o0.0/0i+ml+e -R -J -Cpauline.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg40f4a40+l"Colormap 'haxby', continuous, RGB, 199 segments by D. H. Munro (-T0.790/2.360)" \
+    -Bg20f4a20+l"Colormap 'haxby', Bill Haxby's color scheme (-T17/273)" \
     -I0.2 -By+l"mm" -O -K >> $ps
     
 # Add grid
