@@ -63,7 +63,7 @@ gmt psscale -Dg297/-28.6+w15.2c/0.4c+h+o0.0/0i+ml+e -R -J -Cpauline.cpt \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
     -Bg40f4a40+l"Colormap 'haxby', continuous, RGB, 199 segments by D. H. Munro (-T0.790/2.360)" \
-    -I0.2 -By+l"VPD value" -O -K >> $ps
+    -I0.2 -By+l"mm" -O -K >> $ps
     
 # Add grid
 gmt psbasemap -R -J \
