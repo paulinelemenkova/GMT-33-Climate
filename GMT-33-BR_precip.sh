@@ -60,8 +60,8 @@ gmt psbasemap -R -J \
 
 # Add scalebar, directional rose
 gmt psbasemap -R -J \
-    --FONT_LABEL=10p,Helvetica,black \
-    --FONT_ANNOT_PRIMARY=9p,Helvetica,black \
+    --FONT_LABEL=10p,0,black \
+    --FONT_ANNOT_PRIMARY=10p,0,black \
     --MAP_LABEL_OFFSET=0.1c \
     -Lx12.7c/-2.3c+c50+w700k+l"Mercator projection. Scale: km"+f \
     -UBL/-5p/-65p -O -K >> $ps
