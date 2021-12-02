@@ -55,7 +55,7 @@ gmt psbasemap -R -J \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_LABEL=7p,25,black \
     --FONT_TITLE=16p,13,black \
-    -Bpxg2f0.5a2 -Bpyg2f2a2 -Bsxg1 -Bsyg1 \
+    -Bpxg50f1a2 -Bpyg20f2a2 -Bsxg50 -Bsyg20 \
     -B+t"Soil moisture map of Ethiopia (2018)" -O -K >> $ps
     
 # Add scalebar, directional rose
@@ -64,6 +64,7 @@ gmt psbasemap -R -J \
     --FONT_ANNOT_PRIMARY=8p,0,black \
     --MAP_TITLE_OFFSET=0.1c \
     --MAP_ANNOT_OFFSET=0.1c \
+    -Tdx1.3c/11.5c+w0.5i+f2+l+o0.15i \
     -Lx14.5c/-1.2c+c10+w300k+l"Mercator projection. Scale (km)"+f \
     -UBL/-10p/-40p -O -K >> $ps
 
