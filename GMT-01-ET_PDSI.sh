@@ -1,5 +1,5 @@
 #!/bin/sh
-# Purpose: shaded relief grid raster map from the GEBCO 15 arc sec global data set (here: Ethiopia)
+# Purpose: Climate datasets https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php (here: Ethiopia)
 # GMT modules: gmtset, gmtdefaults, grdcut, makecpt, grdimage, psscale, grdcontour, psbasemap, gmtlogo, psconvert
 
 # GMT set up
@@ -20,10 +20,12 @@ gmtdefaults -D > .gmtdefaults
 # Extract a subset of ETOPO1m for the study area
 gmt grdcut TerraClimate_PDSI_2018.nc -R33/48/3/15 -Get_pdsi.nc
 gdalinfo -stats et_pdsi.nc
-#  Minimum=-11.700, Maximum=2.300
+# Min=-6.000 Max=7.600
+# Minimum=-11.700, Maximum=2.300
 
 # Make color palette
-gmt makecpt -Cturbo.cpt -V -T-12/3/0.4 > myocean.cpt
+# gmt makecpt -Cturbo.cpt -V -T-12/3/0.4 > myocean.cpt
+gmt makecpt -Cturbo.cpt -V -T-12/7.8/0.4 > myocean.cpt
 # gmt makecpt --help
 # elevation etopo1 world elevation dem1 dem2 dem3
 
@@ -45,7 +47,7 @@ gmt psscale -Dg31.5/3+w13.3c/0.15i+v+o0.0/0i+ml -R -J -Cmyocean.cpt \
     --FONT_TITLE=6p,0,black \
     --MAP_LABEL_OFFSET=0.2c \
     --MAP_ANNOT_OFFSET=0.2c \
-    -Bg2f0.1a1+l"Colormap 'turbo'Google's Improved Rainbow Colormap [-12/3/0.4, C=RGB]" \
+    -Bg2f0.1a1+l"Colormap 'turbo' Google's Improved Rainbow Colormap [-12/3/0.4, C=RGB]" \
     -I0.2 -By+l"PDSI value" -O -K >> $ps
     
 # Add grid
@@ -56,7 +58,7 @@ gmt psbasemap -R -J \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_LABEL=7p,25,black \
     --FONT_TITLE=16p,13,black \
-    -Bpxg2f0.5a2 -Bpyg2f2a2 -Bsxg1 -Bsyg1 \
+    -Bpxg50f1a2 -Bpyg20f2a2 -Bsxg50 -Bsyg20 \
     -B+t"PDSI (Palmer Drought Severity Index) in Ethiopia (2018)" -O -K >> $ps
     
 # Add scalebar, directional rose
@@ -65,8 +67,12 @@ gmt psbasemap -R -J \
     --FONT_ANNOT_PRIMARY=8p,0,black \
     --MAP_TITLE_OFFSET=0.1c \
     --MAP_ANNOT_OFFSET=0.1c \
+    -Tdx1.3c/11.5c+w0.5i+f2+l+o0.15i \
     -Lx14.5c/-1.2c+c10+w300k+l"Mercator projection. Scale (km)"+f \
     -UBL/-10p/-35p -O -K >> $ps
+
+#psbasemap -R -J -E60/30 -T46/6/1i \
+    --COLOR_BACKGROUND=red --TICK_PEN=thinner,red -O -K >> $ps
 
 # Add GMT logo
 gmt logo -Dx7.0/-2.0+o0.1i/0.1i+w2c -O -K >> $ps
