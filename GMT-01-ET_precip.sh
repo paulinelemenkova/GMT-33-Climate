@@ -1,5 +1,5 @@
 #!/bin/sh
-# Purpose: precipitation (here: Ethiopia)
+# Purpose: Climate datasets https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php (here: Ethiopia)
 # GMT modules: gmtset, gmtdefaults, grdcut, makecpt, grdimage, psscale, grdcontour, psbasemap, gmtlogo, psconvert
 
 # GMT set up
@@ -24,19 +24,19 @@ gdalinfo -stats et_precipitation.nc
 
 # Make color palette
 # gmt makecpt --help
-gmt makecpt -Csealand.cpt -V -T1/211 -N > myocean.cpt
+gmt makecpt -Csealand.cpt -T0/211 > myocean.cpt
 # elevation etopo1 world elevation dem1 dem2 dem3
 
 ps=ET_Precip.ps
 # Make background transparent image
-gmt grdimage et_precipitation.nc -Csealand -R33/48/3/15 -JM6.5i -I+a15+ne0.75 -Xc -P -K > $ps
+gmt grdimage et_precipitation.nc -Cmyocean.cpt -R33/48/3/15 -JM6.5i -I+a15+ne0.75 -Xc -P -K > $ps
     
 # Add isolines
-gmt grdcontour et_precipitation.nc -R -J -C10 -A20 -Wthinner,brown -O -K >> $ps
+gmt grdcontour et_precipitation.nc -R -J -C50 -A100 -Wthinner,brown -O -K >> $ps
 
 # Add coastlines, borders, rivers
 gmt pscoast -R -J -P \
-    -Ia/thinner,blue -Na -N1/thicker,red -W0.1p -Df -O -K >> $ps
+    -Ia/thinner,blue -Na -N1/thicker,green -W0.1p -Df -O -K >> $ps
     
 # Add color legend
 gmt psscale -Dg31.5/3+w13.3c/0.15i+v+o0.0/0i+ml -R -J -Cmyocean.cpt \
@@ -54,7 +54,7 @@ gmt psbasemap -R -J \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_LABEL=7p,25,black \
     --FONT_TITLE=16p,13,black \
-    -Bpxg2f0.5a2 -Bpyg2f2a2 -Bsxg1 -Bsyg1 \
+    -Bpxg50f1a2 -Bpyg20f2a2 -Bsxg50 -Bsyg20 \
     -B+t"Precipitation in Ethiopia (2018)" -O -K >> $ps
     
 # Add scalebar, directional rose
@@ -63,6 +63,7 @@ gmt psbasemap -R -J \
     --FONT_ANNOT_PRIMARY=8p,0,black \
     --MAP_TITLE_OFFSET=0.1c \
     --MAP_ANNOT_OFFSET=0.1c \
+    -Tdx1.3c/11.5c+w0.5i+f2+l+o0.15i \
     -Lx14.5c/-1.2c+c10+w300k+l"Mercator projection. Scale (km)"+f \
     -UBL/-10p/-40p -O -K >> $ps
 
