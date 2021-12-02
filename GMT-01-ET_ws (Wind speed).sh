@@ -1,5 +1,5 @@
 #!/bin/sh
-# Purpose: shaded relief grid raster map from the GEBCO 15 arc sec global data set (here: Ethiopia)
+# Purpose: Climate datasets https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php (here: Ethiopia)
 # GMT modules: gmtset, gmtdefaults, grdcut, makecpt, grdimage, psscale, grdcontour, psbasemap, gmtlogo, psconvert
 
 # GMT set up
@@ -56,17 +56,41 @@ gmt psbasemap -R -J \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_LABEL=7p,25,black \
     --FONT_TITLE=16p,13,black \
-    -Bpxg2f0.5a2 -Bpyg2f2a2 -Bsxg1 -Bsyg1 \
+    -Bpxg50f1a2 -Bpyg20f2a2 -Bsxg50 -Bsyg20 \
     -B+t"WS (Wind speed): Ethiopia (2018)" -O -K >> $ps
     
 # Add scalebar, directional rose
 gmt psbasemap -R -J \
-    --FONT_LABEL=8p,0,black \
-    --FONT_ANNOT_PRIMARY=8p,0,black \
+    --FONT_LABEL=9p,0,black \
+    --FONT_ANNOT_PRIMARY=9p,0,black \
     --MAP_TITLE_OFFSET=0.1c \
     --MAP_ANNOT_OFFSET=0.1c \
+    -Tdx1.3c/11.5c+w0.5i+f2+l+o0.15i \
     -Lx14.5c/-1.2c+c10+w300k+l"Mercator projection. Scale (km)"+f \
     -UBL/-10p/-35p -O -K >> $ps
+
+# Texts
+gmt pstext -R -J -N -O -K \
+-F+jTL+f10p,0,royalblue4+jLB >> $ps << EOF
+41.5 14.3 Red Sea
+EOF
+gmt pstext -R -J -N -O -K \
+-F+jTL+f10p,0,royalblue4+jLB+a-345 >> $ps << EOF
+45.5 11.8 Gulf of Aden
+EOF
+gmt pstext -R -J -N -O -K \
+-F+jTL+f9p,26,blue2+jLB+a-60 >> $ps << EOF
+42.9 13.4 Bab-el-Mandeb
+EOF
+
+# Cities
+gmt pstext -R -J -N -O -K \
+-F+f11p,13,black+jLB -Gwhite@40 >> $ps << EOF
+37.4 9.3 Addis Ababa
+EOF
+gmt psxy -R -J -Ss -W0.5p -Gwhite -O -K << EOF >> $ps
+38.4 9.1 0.30c
+EOF
 
 # Add GMT logo
 gmt logo -Dx7.0/-2.0+o0.1i/0.1i+w2c -O -K >> $ps
