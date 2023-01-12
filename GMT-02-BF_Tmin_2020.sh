@@ -28,7 +28,7 @@ gmt psscale -Dg-6.0/8.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg10f0.1a1 \
+    -Bg1f0.1a1 \
     -I0.2 -By+l"T\232 C" -O -K >> $ps
     
 # Add grid
