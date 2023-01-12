@@ -5,23 +5,23 @@
 exec bash
 
 # Extract a subset of ETOPO1m for the study area
-gmt grdcut TerraClimate_tmin_2020.nc -R-6/3/9/15.5 -Gbf_tim.nc
-gdalinfo -stats bf_tim.nc
+gmt grdcut TerraClimate_tmin_2020.nc -R-6/3/9/15.5 -Gbf_tim2020.nc
+gdalinfo -stats bf_tim2020.nc
 # actual_range={11.69999980926514,21.19999885559082}
 
 # Make color palette
-gmt makecpt -Cwysiwyg.cpt -V -T11/22 > pauline.cpt
+gmt makecpt -Cjet.cpt -V -T11/22 > pauline.cpt
 
 ps=BF_Tmin_2020.ps
 # Make background transparent image
-gmt grdimage bf_tim.nc -Cpauline.cpt -R-6/3/9/15.5 -JM6.5i -I+a15+ne0.75 -Xc -t20 -P -K > $ps
+gmt grdimage bf_tim2020.nc -Cpauline.cpt -R-6/3/9/15.5 -JM6.5i -I+a15+ne0.75 -Xc -t20 -P -K > $ps
     
 # Add isolines
-gmt grdcontour bf_tim.nc -R -J -C1 -A10 -Wthin,white -O -K >> $ps
+gmt grdcontour bf_tim2020.nc -R -J -C1 -A1 -Wthicker,blue -O -K >> $ps
 
 # Add coastlines, borders, rivers
 gmt pscoast -R -J -P \
-    -Ia/thinner,blue -Na -N1/thickest,darkbrown -W0.1p -Df -O -K >> $ps
+    -Ia/thinner,blue -Na -N1/thickest,white -W0.1p -Df -O -K >> $ps
     
 # Add color legend
 gmt psscale -Dg-6.0/8.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
