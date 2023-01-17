@@ -17,18 +17,39 @@ ps=BF_aet_2020.ps
 gmt grdimage bf_aet2020.nc -Cpauline.cpt -R-6/3/9/15.5 -JM6.5i -I+a15+ne0.75 -Xc -t20 -P -K > $ps
     
 # Add isolines
-gmt grdcontour bf_aet2020.nc -R -J -C2 -A2 -Wthick,brown -O -K >> $ps
+gmt grdcontour bf_aet2020.nc -R -J -C6 -A6 -Wthin,coral4 -O -K >> $ps
 
 # Add coastlines, borders, rivers
 gmt pscoast -R -J -P \
     -Ia/thinner,blue -Na -N1/thickest,white -W0.1p -Df -O -K >> $ps
-    
+
+#####################################################################
+# CLIPPING
+# 1. Start: clip the map by mask to only include country
+
+gmt psclip -R-6/3/9/15.5 -JM6.5i BurkinaFaso.txt -O -K >> $ps
+
+# 2. create map within mask
+# Add raster image
+gmt grdimage bf_aet2020.nc -Cpauline.cpt -R-6/3/9/15.5 -JM6.5i -I+a15+ne0.75 -Xc -P -O -K >> $ps
+# Add isolines
+gmt grdcontour bf_aet2020.nc -R -J -C2 -A2 -Wthin,coral4 -O -K >> $ps
+# Add coastlines, borders, rivers
+gmt pscoast -R -J \
+    -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+#gmt pscoast -R -J \
+    -Ia/thinner,blue -Na -W0.1p -Df -O -K >> $ps
+
+# 3: Undo the clipping
+gmt psclip -C -O -K >> $ps
+#####################################################################
+
 # Add color legend
-gmt psscale -Dg-6.0/8.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
+gmt psscale -Dg-6.0/8.4+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg5f0.5a10 \
+    -Bg5f0.5a10+l"Colormap palette: '20 hue sat light2' by scientific plotting tool KST; 0 to 256, discrete, RGB, 241 segments" \
     -I0.2 -By+l"mm" -O -K >> $ps
     
 # Add grid
