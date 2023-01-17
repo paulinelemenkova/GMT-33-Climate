@@ -17,18 +17,18 @@ ps=BF_Tmin_2020.ps
 gmt grdimage bf_tim2020.nc -Cpauline.cpt -R-6/3/9/15.5 -JM6.5i -I+a15+ne0.75 -Xc -t20 -P -K > $ps
     
 # Add isolines
-gmt grdcontour bf_tim2020.nc -R -J -C1 -A1 -Wthicker,blue -O -K >> $ps
+gmt grdcontour bf_tim2020.nc -R -J -C0.5 -A1 -Wthick,blue -O -K >> $ps
 
 # Add coastlines, borders, rivers
 gmt pscoast -R -J -P \
     -Ia/thinner,blue -Na -N1/thickest,white -W0.1p -Df -O -K >> $ps
     
 # Add color legend
-gmt psscale -Dg-6.0/8.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
+gmt psscale -Dg-6.0/8.4+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
     --FONT_LABEL=8p,0,black \
     --FONT_ANNOT_PRIMARY=7p,0,black \
     --FONT_TITLE=6p,0,black \
-    -Bg1f0.1a1 \
+    -Bg1f0.1a1+l"Colormap: 'jet': Dark to light blue, white, yellow and red [C=RGB]" \
     -I0.2 -By+l"T\232 C" -O -K >> $ps
     
 # Add grid
